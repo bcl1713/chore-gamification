@@ -1,5 +1,5 @@
 ---
-file: /STYLE_GUIDE.md
+file: /docs/style/STYLE_GUIDE.md
 description: Code and documentation style guide for the project
 project: Household Chore Gamification System
 lastModified: 2025-02-10

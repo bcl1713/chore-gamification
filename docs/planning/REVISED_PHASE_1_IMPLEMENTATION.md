@@ -1,5 +1,5 @@
 ---
-file: /REVISED_PHASE_1_IMPLEMENTATION.md
+file: /docs/planning/REVISED_PHASE_1_IMPLEMENTATION.md
 description:
   Revised implementation checklist for Phase 1 with authentication-first
   approach

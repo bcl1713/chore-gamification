@@ -1,5 +1,5 @@
 ---
-file: /PDR.md
+file: /docs/planning/PDR.md
 description:
   Project Definition Report for the Household Chore Gamification System
 project: Household Chore Gamification System

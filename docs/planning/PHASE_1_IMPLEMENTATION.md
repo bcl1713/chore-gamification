@@ -1,5 +1,5 @@
 ---
-file: /PHASE_1_IMPLEMENTATION.md
+file: /docs/planning/PHASE_1_IMPLEMENTATION.md
 description: Detailed implementation checklist for Phase 1 of the project
 project: Household Chore Gamification System
 lastModified: 2025-02-10
