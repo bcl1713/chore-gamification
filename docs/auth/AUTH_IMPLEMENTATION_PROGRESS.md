@@ -12,7 +12,7 @@ lastModified: 2025-02-12
 - [x] Password hashing (test written)
 - [x] Email uniqueness (test written)
 - [x] Default values (points, level) (test written)
-- [ ] Verification token generation
+- [x] Verification token generation
 - [x] Email format validation (test written)
 - [x] Password requirements (test written)
 
