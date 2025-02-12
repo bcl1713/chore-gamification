@@ -1,0 +1,37 @@
+# File: /prisma/schema.prisma
+# Description: Database schema definition using Prisma
+# Project: Household Chore Gamification System
+# Last Modified: 2025-02-10
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  chores    Chore[]
+}
+
+model Chore {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  points      Int
+  completed   Boolean  @default(false)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+}
