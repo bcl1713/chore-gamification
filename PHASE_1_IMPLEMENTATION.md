@@ -59,14 +59,14 @@ lastModified: 2025-02-10
 #### Configure Jest
 
 - [x] Install Jest and related dependencies
-- [ ] Set up Jest configuration file
-- [ ] Create initial test helpers
+- [x] Set up Jest configuration file
+- [x] Create initial test helpers
 
 #### Set up React Testing Library
 
-- [ ] Install React Testing Library
-- [ ] Configure custom renders
-- [ ] Set up test utilities
+- [x] Install React Testing Library
+- [x] Configure custom renders
+- [x] Set up test utilities
 
 #### Configure Cypress
 
