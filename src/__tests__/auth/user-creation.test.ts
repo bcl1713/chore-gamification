@@ -37,6 +37,7 @@ describe("User Creation", () => {
       email: userData.email,
       emailVerified: null,
       image: null,
+      password: null,
       householdId: null,
       isHouseholdAdmin: false,
       points: 0,
@@ -48,7 +49,7 @@ describe("User Creation", () => {
     const result = await prisma.user.create({
       data: {
         ...userData,
-        image: hashedPassword, // Temporarily storing hashed password in image field
+        password: hashedPassword,
       },
     });
 

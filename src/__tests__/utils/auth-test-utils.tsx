@@ -5,10 +5,10 @@
  * Last Modified: 2025-02-12
  */
 
-import { render } from '@testing-library/react';
-import { Session } from 'next-auth';
-import { SessionProvider } from 'next-auth/react';
-import { ReactNode } from 'react';
+import { render } from "@testing-library/react";
+import { Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
+import { ReactNode } from "react";
 
 export interface MockSessionUser {
   id: string;
@@ -18,11 +18,13 @@ export interface MockSessionUser {
   isHouseholdAdmin?: boolean;
 }
 
-export const createMockSession = (userData: Partial<MockSessionUser> = {}): Session => ({
+export const createMockSession = (
+  userData: Partial<MockSessionUser> = {}
+): Session => ({
   user: {
-    id: 'test-user-id',
-    name: 'Test User',
-    email: 'test@example.com',
+    id: "test-user-id",
+    name: "Test User",
+    email: "test@example.com",
     householdId: undefined,
     isHouseholdAdmin: false,
     ...userData,
@@ -30,16 +32,19 @@ export const createMockSession = (userData: Partial<MockSessionUser> = {}): Sess
   expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
 });
 
-const Providers = ({ children, session }: { children: ReactNode; session: Session | null }) => (
-  <SessionProvider session={session}>{children}</SessionProvider>
-);
+const Providers = ({
+  children,
+  session,
+}: {
+  children: ReactNode;
+  session: Session | null;
+}) => <SessionProvider session={session}>{children}</SessionProvider>;
 
-export const renderWithAuth = (
-  ui: ReactNode,
-  { session = null } = {}
-) => {
+export const renderWithAuth = (ui: ReactNode, { session = null } = {}) => {
   return render(ui, {
-    wrapper: ({ children }) => <Providers session={session}>{children}</Providers>,
+    wrapper: ({ children }) => (
+      <Providers session={session}>{children}</Providers>
+    ),
   });
 };
 
@@ -47,17 +52,18 @@ export const mockRouter = {
   push: jest.fn(),
   replace: jest.fn(),
   prefetch: jest.fn(),
-  route: '/',
-  pathname: '/',
+  route: "/",
+  pathname: "/",
   query: {},
-  asPath: '/',
+  asPath: "/",
 };
 
 export const createMockUser = (overrides: Partial<MockSessionUser> = {}) => ({
-  id: 'test-user-id',
-  name: 'Test User',
-  email: 'test@example.com',
+  id: "test-user-id",
+  name: "Test User",
+  email: "test@example.com",
   emailVerified: null,
+  password: null,
   image: null,
   householdId: null,
   isHouseholdAdmin: false,
