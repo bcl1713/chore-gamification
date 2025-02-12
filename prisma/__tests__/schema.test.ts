@@ -30,6 +30,7 @@ describe("User Model", () => {
       id: "1",
       name: userData.name,
       email: userData.email,
+      password: null, // Added password field
       emailVerified: null,
       image: null,
       createdAt: new Date(),
@@ -166,6 +167,7 @@ describe("Model Relationships", () => {
       id: "1",
       name: userData.name,
       email: userData.email,
+      password: null, // Added password field
       emailVerified: null,
       image: null,
       createdAt: new Date(),
