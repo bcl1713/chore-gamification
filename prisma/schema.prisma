@@ -1,37 +1,138 @@
-# File: /prisma/schema.prisma
-# Description: Database schema definition using Prisma
-# Project: Household Chore Gamification System
-# Last Modified: 2025-02-10
-
-generator client {
-  provider = "prisma-client-js"
-}
+// File: /prisma/schema.prisma
+// Description: Initial database schema with focus on user/auth tables
+// Project: Household Chore Gamification System
+// Last Modified: 2025-02-11
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  image     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  chores    Chore[]
+generator client {
+  provider = "prisma-client-js"
 }
 
+// User and authentication related models
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Auth
+  accounts Account[]
+  sessions Session[]
+
+  // Household relationship
+  household        Household? @relation(fields: [householdId], references: [id])
+  householdId      String?
+  isHouseholdAdmin Boolean    @default(false)
+
+  // Points and progress tracking (core to gamification)
+  points Int @default(0)
+  level  Int @default(1)
+
+  // Relations for gamification features
+  completedChores ChoreCompletion[]
+  achievements    UserAchievement[]
+}
+
+// NextAuth.js required models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Core models for household management
+model Household {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  members User[]
+  chores  Chore[]
+}
+
+// Base models for gamification features
 model Chore {
   id          String   @id @default(cuid())
-  title       String
-  description String
+  name        String
+  description String?
   points      Int
-  completed   Boolean  @default(false)
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  frequency   String // daily, weekly, monthly, etc.
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  @@index([userId])
+  household   Household @relation(fields: [householdId], references: [id])
+  householdId String
+
+  completions ChoreCompletion[]
+}
+
+model ChoreCompletion {
+  id          String   @id @default(cuid())
+  completedAt DateTime @default(now())
+
+  chore   Chore  @relation(fields: [choreId], references: [id])
+  choreId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model Achievement {
+  id          String @id @default(cuid())
+  name        String
+  description String
+  points      Int
+  requirement String // JSON string containing achievement criteria
+
+  userAchievements UserAchievement[]
+}
+
+model UserAchievement {
+  id         String   @id @default(cuid())
+  unlockedAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  achievement   Achievement @relation(fields: [achievementId], references: [id])
+  achievementId String
+
+  @@unique([userId, achievementId])
 }
