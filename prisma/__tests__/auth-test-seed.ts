@@ -10,15 +10,32 @@ import { hash } from "bcrypt";
 
 const prisma = new PrismaClient();
 
-export async function seedAuthTestData() {
+export interface TestUsers {
+  verifiedUser: {
+    id: string;
+    email: string;
+    password: string;
+  };
+  unverifiedUser: {
+    id: string;
+    email: string;
+    password: string;
+  };
+  oauthUser: {
+    id: string;
+    email: string;
+  };
+}
+
+export async function seedAuthTestData(): Promise<TestUsers> {
   // Clear existing auth-related data
   await prisma.verificationToken.deleteMany();
   await prisma.session.deleteMany();
   await prisma.account.deleteMany();
   await prisma.user.deleteMany();
 
-  // Create test users with different auth scenarios
-  const hashedPassword = await hash("TestPassword123!", 10);
+  const testPassword = "TestPassword123!";
+  const hashedPassword = await hash(testPassword, 10);
 
   // Verified user with password
   const verifiedUser = await prisma.user.create({
@@ -26,6 +43,9 @@ export async function seedAuthTestData() {
       name: "Verified User",
       email: "verified@example.com",
       emailVerified: new Date(),
+      // In a real app, we'd use a proper auth solution
+      // This is just for testing purposes
+      image: hashedPassword, // Store hashed password in image field temporarily
     },
   });
 
@@ -35,6 +55,7 @@ export async function seedAuthTestData() {
       name: "Unverified User",
       email: "unverified@example.com",
       emailVerified: null,
+      image: hashedPassword, // Store hashed password in image field temporarily
     },
   });
 
@@ -80,9 +101,20 @@ export async function seedAuthTestData() {
   });
 
   return {
-    verifiedUser,
-    unverifiedUser,
-    oauthUser,
+    verifiedUser: {
+      id: verifiedUser.id,
+      email: verifiedUser.email,
+      password: testPassword,
+    },
+    unverifiedUser: {
+      id: unverifiedUser.id,
+      email: unverifiedUser.email,
+      password: testPassword,
+    },
+    oauthUser: {
+      id: oauthUser.id,
+      email: oauthUser.email,
+    },
   };
 }
 
