@@ -1,15 +1,15 @@
 /**
- * File: /src/__tests__/utils/auth-test-utils.ts
+ * File: /src/__tests__/utils/auth-test-utils.tsx
  * Description: Test utilities for authentication testing
  * Project: Household Chore Gamification System
  * Last Modified: 2025-02-12
  */
 
 import { render } from '@testing-library/react';
+import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
-import { ReactElement } from 'react';
+import { ReactNode } from 'react';
 
-// Mock session data types based on our schema
 export interface MockSessionUser {
   id: string;
   name: string;
@@ -18,13 +18,7 @@ export interface MockSessionUser {
   isHouseholdAdmin?: boolean;
 }
 
-export interface MockSession {
-  user: MockSessionUser;
-  expires: string;
-}
-
-// Helper to create a mock session
-export const createMockSession = (userData: Partial<MockSessionUser> = {}): MockSession => ({
+export const createMockSession = (userData: Partial<MockSessionUser> = {}): Session => ({
   user: {
     id: 'test-user-id',
     name: 'Test User',
@@ -33,25 +27,22 @@ export const createMockSession = (userData: Partial<MockSessionUser> = {}): Mock
     isHouseholdAdmin: false,
     ...userData,
   },
-  expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // 24 hours from now
+  expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
 });
 
-// Custom render with auth provider
-export const renderWithAuth = (
-  ui: ReactElement,
-  { session = null, ...renderOptions } = {}
-) => {
-  const Wrapper = ({ children }: { children: ReactElement }) => (
-    <SessionProvider session={session}>{children}</SessionProvider>
-  );
+const Providers = ({ children, session }: { children: ReactNode; session: Session | null }) => (
+  <SessionProvider session={session}>{children}</SessionProvider>
+);
 
+export const renderWithAuth = (
+  ui: ReactNode,
+  { session = null } = {}
+) => {
   return render(ui, {
-    wrapper: Wrapper,
-    ...renderOptions,
+    wrapper: ({ children }) => <Providers session={session}>{children}</Providers>,
   });
 };
 
-// Mock Next.js navigation
 export const mockRouter = {
   push: jest.fn(),
   replace: jest.fn(),
@@ -62,7 +53,6 @@ export const mockRouter = {
   asPath: '/',
 };
 
-// Helper to create mock user data
 export const createMockUser = (overrides: Partial<MockSessionUser> = {}) => ({
   id: 'test-user-id',
   name: 'Test User',
