@@ -1,7 +1,7 @@
 // File: /prisma/schema.prisma
-// Description: Initial database schema with focus on user/auth tables
+// Description: Database schema
 // Project: Household Chore Gamification System
-// Last Modified: 2025-02-11
+// Last Modified: 2025-02-12
 
 datasource db {
   provider = "postgresql"
@@ -17,6 +17,7 @@ model User {
   id            String    @id @default(cuid())
   name          String
   email         String    @unique
+  password      String?
   emailVerified DateTime?
   image         String?
   createdAt     DateTime  @default(now())
