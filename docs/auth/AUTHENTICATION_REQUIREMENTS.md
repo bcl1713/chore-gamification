@@ -21,7 +21,7 @@ lastModified: 2025-02-12
    - Secure session handling using NextAuth.js
    - Session persistence across page reloads
    - Automatic session refresh
-   - Secure session timeout (30 minutes of inactivity)
+   - Extended session persistence for local usage
 
 3. Authorization
 

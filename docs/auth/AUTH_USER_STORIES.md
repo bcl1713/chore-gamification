@@ -55,6 +55,7 @@ As a logged-in user, I want my session to be managed securely.
 **Acceptance Criteria:**
 
 - Session persists across page reloads
-- Session expires after 30 minutes of inactivity
 - Can log out from any page
 - All sessions terminated when password changed
+- "Remember me" enabled by default
+- Session persists until explicit logout
