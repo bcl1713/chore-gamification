@@ -28,8 +28,8 @@ lastModified: 2025-02-11
 
 ### 3. Database Schema Design
 
-- [ ] Design initial schema with focus on user/auth tables
-- [ ] Create migration strategy
+- [x] Design initial schema with focus on user/auth tables
+- [x] Create migration strategy
 - [ ] Implement Prisma schema
 - [ ] Create database seed framework
 - [ ] Write schema tests
