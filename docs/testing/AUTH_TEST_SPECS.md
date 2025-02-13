@@ -16,60 +16,60 @@ functionality, focusing on backend operations before UI implementation.
 
 1. User Registration Operations
 
-   - Should hash password correctly
-   - Should enforce email uniqueness
-   - Should set correct default values (points, level)
-   - Should generate verification token
-   - Should handle invalid email formats
-   - Should enforce password requirements
+   - [x] Should enforce email uniqueness
+   - [x] Should handle invalid email formats
+   - [ ] Should hash password correctly
+   - [ ] Should set correct default values (points, level)
+   - [ ] Should generate verification token
+   - [x] Should enforce password requirements
 
 2. OAuth Account Linking
-   - Should create new user from OAuth data
-   - Should link OAuth account to existing user
-   - Should prevent duplicate OAuth accounts
-   - Should handle missing OAuth data gracefully
+   - [ ] Should create new user from OAuth data
+   - [ ] Should link OAuth account to existing user
+   - [ ] Should prevent duplicate OAuth accounts
+   - [ ] Should handle missing OAuth data gracefully
 
 ### Session Management
 
 1. Session Operations
 
-   - Should create new session with correct expiry
-   - Should validate session tokens
-   - Should handle session refresh
-   - Should properly expire sessions
-   - Should handle concurrent sessions
-   - Should invalidate sessions on password change
+   - [ ] Should create new session with correct expiry
+   - [ ] Should validate session tokens
+   - [ ] Should handle session refresh
+   - [ ] Should properly expire sessions
+   - [ ] Should handle concurrent sessions
+   - [ ] Should invalidate sessions on password change
 
 2. Session Security
-   - Should implement CSRF protection
-   - Should handle token rotation
-   - Should detect session tampering
-   - Should manage cookie security attributes
+   - [ ] Should implement CSRF protection
+   - [ ] Should handle token rotation
+   - [ ] Should detect session tampering
+   - [ ] Should manage cookie security attributes
 
 ### Email Verification
 
 1. Verification Flow
-   - Should generate secure verification tokens
-   - Should validate token expiration
-   - Should update user email verified status
-   - Should handle invalid/expired tokens
-   - Should prevent verification of already verified emails
+   - [ ] Should generate secure verification tokens
+   - [ ] Should validate token expiration
+   - [ ] Should update user email verified status
+   - [ ] Should handle invalid/expired tokens
+   - [ ] Should prevent verification of already verified emails
 
 ### Password Reset
 
 1. Reset Token Management
 
-   - Should generate secure reset tokens
-   - Should enforce token expiration
-   - Should validate token uniqueness
-   - Should handle concurrent reset requests
+   - [ ] Should generate secure reset tokens
+   - [ ] Should enforce token expiration
+   - [ ] Should validate token uniqueness
+   - [ ] Should handle concurrent reset requests
 
 2. Password Update Operations
-   - Should validate password requirements
-   - Should update password hash
-   - Should invalidate existing sessions
-   - Should handle invalid reset attempts
-   - Should prevent reuse of old tokens
+   - [ ] Should validate password requirements
+   - [ ] Should update password hash
+   - [ ] Should invalidate existing sessions
+   - [ ] Should handle invalid reset attempts
+   - [ ] Should prevent reuse of old tokens
 
 ## Testing Strategy
 

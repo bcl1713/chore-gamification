@@ -77,7 +77,7 @@ lastModified: 2025-02-12
 - [x] Create email validation tests
 - [x] Write default value tests
 - [x] Implement user service
-- [ ] Add validation middleware
+- [x] Add validation middleware
 
 ### Email Verification
 
