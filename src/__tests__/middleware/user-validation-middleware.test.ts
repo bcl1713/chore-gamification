@@ -44,11 +44,12 @@ describe("User Validation Middleware", () => {
     };
 
     const request = createRequest(invalidInput);
-    const response = validateUserInput(request, mockNext);
+    const response = await validateUserInput(request, mockNext);
 
     expect(response).toBeInstanceOf(NextResponse);
+    const responseJson = await (response as NextResponse).json();
     expect(response?.status).toBe(400);
-    expect(await response?.json()).toEqual({
+    expect(responseJson()).toEqual({
       success: false,
       error: {
         code: "VALIDATION_ERROR",
@@ -66,11 +67,12 @@ describe("User Validation Middleware", () => {
     };
 
     const request = createRequest(invalidInput);
-    const response = validateUserInput(request, mockNext);
+    const response = await validateUserInput(request, mockNext);
 
     expect(response).toBeInstanceOf(NextResponse);
+    const responseJson = await (response as NextResponse).json();
     expect(response?.status).toBe(400);
-    expect(await response?.json()).toEqual({
+    expect(responseJson()).toEqual({
       success: false,
       error: {
         code: "VALIDATION_ERROR",
