@@ -9,8 +9,8 @@ import { UserRegistrationInput } from "@/types/auth-test";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function validateUserInput(
-  request: NextRequest,
-  next: (validatedBody: UserRegistrationInput) => Promise<void>
+  _request: NextRequest,
+  _next: (validatedBody: UserRegistrationInput) => Promise<void>
 ): Promise<NextResponse | undefined> {
   //Stub
   return undefined;

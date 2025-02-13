@@ -5,13 +5,11 @@
  * Last Modified: 2025-02-12
  */
 
-import { createMockUser } from "@/utils/test/auth-test-utils";
-import {
-  NextRequest,
-  NextResponse,
-} from "@/utils/test/__mocks__/next-server-mock";
+import { NextRequest, NextResponse } from "next/server";
 import { validateUserInput } from "@/lib/middleware/user-validation";
 import { UserRegistrationInput } from "@/types/auth-test";
+
+jest.mock("next/server");
 
 describe("User Validation Middleware", () => {
   const mockNext = jest.fn();
