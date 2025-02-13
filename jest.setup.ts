@@ -21,3 +21,6 @@ jest.mock("next/navigation", () => ({
     };
   },
 }));
+
+global.Request = require("node-fetch").Request;
+global.Response = require("node-fetch").Response;

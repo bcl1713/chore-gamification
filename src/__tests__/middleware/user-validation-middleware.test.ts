@@ -5,7 +5,11 @@
  * Last Modified: 2025-02-12
  */
 
-import { NextRequest, NextResponse } from "next/server";
+import { createMockUser } from "@/utils/test/auth-test-utils";
+import {
+  NextRequest,
+  NextResponse,
+} from "@/utils/test/__mocks__/next-server-mock";
 import { validateUserInput } from "@/lib/middleware/user-validation";
 import { UserRegistrationInput } from "@/types/auth-test";
 
