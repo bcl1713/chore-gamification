@@ -51,7 +51,7 @@ describe("User Validation Middleware", () => {
     expect(response).toBeInstanceOf(NextResponse);
     const responseJson = await (response as NextResponse).json();
     expect(response?.status).toBe(400);
-    expect(responseJson()).toEqual({
+    expect(responseJson).toEqual({
       success: false,
       error: {
         code: "VALIDATION_ERROR",
@@ -74,7 +74,7 @@ describe("User Validation Middleware", () => {
     expect(response).toBeInstanceOf(NextResponse);
     const responseJson = await (response as NextResponse).json();
     expect(response?.status).toBe(400);
-    expect(responseJson()).toEqual({
+    expect(responseJson).toEqual({
       success: false,
       error: {
         code: "VALIDATION_ERROR",

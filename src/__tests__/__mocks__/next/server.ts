@@ -5,7 +5,7 @@
  * Last Modified: 2025-02-12
  */
 
-class MockNextResponse {
+export class NextResponse {
   public status: number;
   private responseData: unknown;
 
@@ -17,13 +17,11 @@ class MockNextResponse {
   async json() {
     return this.responseData;
   }
-}
 
-export const NextResponse = {
-  json: (data: unknown, init?: { status?: number }) => {
-    return new MockNextResponse(data, init);
-  },
-};
+  static json(data: unknown, init?: { status?: number }) {
+    return new NextResponse(data, init);
+  }
+}
 
 export const NextRequest = jest
   .fn()
