@@ -14,7 +14,14 @@ export async function validateUserInput(
   request: NextRequest,
   next: (validatedBody: UserRegistrationInput) => Promise<void>
 ): Promise<NextResponse | undefined> {
-  const body = (await request.json()) as UserRegistrationInput;
+  const rawBody = (await request.json()) as UserRegistrationInput;
+
+  const body = {
+    ...rawBody,
+    name: rawBody.name?.trim(),
+    email: rawBody.email?.trim(),
+    password: rawBody.password,
+  };
 
   if (body.email && !EMAIL_REGEX.test(body.email)) {
     return NextResponse.json(
