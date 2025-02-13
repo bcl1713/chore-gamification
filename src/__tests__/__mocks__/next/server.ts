@@ -5,11 +5,24 @@
  * Last Modified: 2025-02-12
  */
 
+class MockNextResponse {
+  public status: number;
+  private responseData: unknown;
+
+  constructor(data: unknown, init?: { status?: number }) {
+    this.responseData = data;
+    this.status = init?.status || 200;
+  }
+
+  async json() {
+    return this.responseData;
+  }
+}
+
 export const NextResponse = {
-  json: (data: unknown) => ({
-    status: 400,
-    json: async () => data,
-  }),
+  json: (data: unknown, init?: { status?: number }) => {
+    return new MockNextResponse(data, init);
+  },
 };
 
 export const NextRequest = jest
