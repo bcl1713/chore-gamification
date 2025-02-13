@@ -19,3 +19,9 @@ export interface MockUserWithPassword {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface UserRegistrationInput {
+  name?: string;
+  email?: string;
+  password?: string;
+}

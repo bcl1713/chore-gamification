@@ -7,6 +7,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { validateUserInput } from "@/lib/middleware/user-validation";
+import { UserRegistrationInput } from "@/types/auth-test";
 
 describe("User Validation Middleware", () => {
   const mockNext = jest.fn();
@@ -15,7 +16,7 @@ describe("User Validation Middleware", () => {
     jest.clearAllMocks();
   });
 
-  const createRequest = (body: any): NextRequest => {
+  const createRequest = (body: UserRegistrationInput): NextRequest => {
     return new NextRequest("http://localhost/api/auth/register", {
       method: "POST",
       body: JSON.stringify(body),
