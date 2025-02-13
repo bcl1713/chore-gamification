@@ -20,5 +20,6 @@ export const NextRequest = jest
     nextUrl: new URL(url),
     page: { name: "test" },
     ua: { isBot: false },
+    json: async () => JSON.parse((init?.body as string) || "{}"),
     ...init,
   }));
