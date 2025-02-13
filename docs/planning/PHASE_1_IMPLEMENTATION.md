@@ -76,7 +76,7 @@ lastModified: 2025-02-12
 - [x] Implement password hashing tests
 - [x] Create email validation tests
 - [x] Write default value tests
-- [ ] Implement user service
+- [x] Implement user service
 - [ ] Add validation middleware
 
 ### Email Verification
