@@ -85,6 +85,7 @@ achievements, and rewards.
    - Email validation
    - Account creation flows
    - User service tests and implementation
+   - Default value handling in service layer
 
 3. Authentication Flows (TDD)
 

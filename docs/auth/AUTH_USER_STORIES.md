@@ -19,6 +19,7 @@ tracking system.
 - Receive email verification link
 - Password must meet security requirements (8+ chars, 1 number, 1 special char)
 - Cannot create account with email that's already registered
+- New users initialized with correct default values
 - Redirected to onboarding after successful registration
 
 ## Login

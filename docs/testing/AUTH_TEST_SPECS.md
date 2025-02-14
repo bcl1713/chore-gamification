@@ -19,7 +19,7 @@ functionality, focusing on backend operations before UI implementation.
    - [x] Should enforce email uniqueness
    - [x] Should handle invalid email formats
    - [x] Should hash password correctly
-   - [ ] Should set correct default values (points, level)
+   - [x] Should set correct default values (points, level)
    - [ ] Should generate verification token
    - [x] Should enforce password requirements
 

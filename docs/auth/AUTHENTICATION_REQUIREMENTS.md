@@ -15,6 +15,7 @@ lastModified: 2025-02-12
    - OAuth support for major providers (Google, GitHub)
    - Email verification for new accounts
    - Password recovery flow
+   - Default user state initialization
 
 2. Session Management
 
