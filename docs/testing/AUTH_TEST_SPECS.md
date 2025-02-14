@@ -20,7 +20,7 @@ functionality, focusing on backend operations before UI implementation.
    - [x] Should handle invalid email formats
    - [x] Should hash password correctly
    - [x] Should set correct default values (points, level)
-   - [ ] Should generate verification token
+   - [x] Should generate verification token
    - [x] Should enforce password requirements
 
 2. OAuth Account Linking
