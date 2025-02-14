@@ -80,6 +80,9 @@ export class UserService {
           name: input.name,
           email: input.email,
           password: hashedPassword,
+          points: 0,
+          level: 1,
+          isHouseholdAdmin: false,
         },
         select: {
           id: true,
