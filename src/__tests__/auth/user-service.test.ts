@@ -32,6 +32,36 @@ describe("UserService", () => {
       password: "Password123!",
     };
 
+    it("should set correct default values for new users", async () => {
+      prisma.user.create.mockResolvedValue({
+        id: "1",
+        ...validUserData,
+        password: expect.any(String),
+        emailVerified: null,
+        image: null,
+        householdId: null,
+        isHouseholdAdmin: false,
+        points: 0,
+        level: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+
+      const result = await userService.createUser(validUserData);
+
+      expect(result.success).toBe(true);
+      expect(prisma.user.create).toHaveBeenCalledWith({
+        data: expect.objectContaining({
+          name: validUserData.name,
+          email: validUserData.email,
+          points: 0,
+          level: 1,
+          isHouseholdAdminf: false,
+        }),
+        select: expect.any(Object),
+      });
+    });
+
     it("should create a user successfully with valid data", async () => {
       prisma.user.create.mockResolvedValue({
         id: "1",
