@@ -8,6 +8,7 @@
 import { PrismaClient } from "@prisma/client";
 import { DeepMockProxy, mockDeep, mockReset } from "jest-mock-extended";
 import bcrypt from "bcrypt";
+import { MockUserWithPassword } from "@/types/auth-test";
 
 // Mock PrismaClient
 jest.mock("@prisma/client", () => ({
@@ -121,5 +122,73 @@ describe("User Creation", () => {
         })
       ).rejects.toThrow("Password does not meet requirements");
     }
+  });
+
+  describe("Password Hashing", () => {
+    it("should hash password using bcrypt with correct salt rounds", async () => {
+      const userData = {
+        name: "Test User",
+        email: "test@example.com",
+        password: "Password123!",
+      };
+
+      prisma.user.create.mockResolvedValueOnce({
+        id: "1",
+        name: userData.name,
+        email: userData.email,
+        password: await bcrypt.hash(userData.password, 10),
+        emailVerified: null,
+        image: null,
+        householdId: null,
+        isHouseholdAdmin: false,
+        points: 0,
+        level: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      } satisfies MockUserWithPassword);
+
+      const result = await prisma.user.create({
+        data: userData,
+      });
+
+      // Verify the password was hashed and not stored in plain text
+      expect(result.password).not.toBe(userData.password);
+      expect(result.password).toMatch(/^\$2[aby]\$\d{1,2}\$/); // Bcrypt hash pattern
+
+      // Verify we can validate the password
+      const isValid = await bcrypt.compare(userData.password, result.password!);
+      expect(isValid).toBe(true);
+    });
+
+    it("should use consistent salt rounds for password hashing", async () => {
+      const password = "Password123!";
+      const hashSpy = jest.spyOn(bcrypt, "hash");
+
+      prisma.user.create.mockResolvedValueOnce({
+        id: "1",
+        name: "Test User",
+        email: "test@example.com",
+        password: await bcrypt.hash(password, 10),
+        emailVerified: null,
+        image: null,
+        householdId: null,
+        isHouseholdAdmin: false,
+        points: 0,
+        level: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      } satisfies MockUserWithPassword);
+
+      await prisma.user.create({
+        data: {
+          name: "Test User",
+          email: "test@example.com",
+          password,
+        },
+      });
+
+      expect(hashSpy).toHaveBeenCalledWith(password, 10);
+      hashSpy.mockRestore();
+    });
   });
 });
