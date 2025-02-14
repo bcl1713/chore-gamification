@@ -5,7 +5,7 @@
  * Last Modified: 2025-02-12
  */
 
-interface MockUser {
+export interface MockUser {
   id: string;
   name: string;
   email: string;
@@ -36,4 +36,23 @@ export const createMockUser = (
   createdAt: new Date(),
   updatedAt: new Date(),
   ...overrides,
+});
+
+export interface MockOAuthData {
+  provider: string;
+  providerAccountId: string;
+  email: string;
+  name: string;
+}
+
+export const createMockOAuthUser = ({
+  provider,
+  providerAccountId,
+  email,
+  name,
+}: MockOAuthData) => ({
+  provider,
+  providerAccountId,
+  email,
+  name,
 });

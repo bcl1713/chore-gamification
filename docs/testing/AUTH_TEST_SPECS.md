@@ -24,7 +24,7 @@ functionality, focusing on backend operations before UI implementation.
    - [x] Should enforce password requirements
 
 2. OAuth Account Linking
-   - [ ] Should create new user from OAuth data
+   - [x] Should create new user from OAuth data
    - [ ] Should link OAuth account to existing user
    - [ ] Should prevent duplicate OAuth accounts
    - [ ] Should handle missing OAuth data gracefully
