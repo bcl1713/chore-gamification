@@ -56,7 +56,7 @@ describe("UserService", () => {
           email: validUserData.email,
           points: 0,
           level: 1,
-          isHouseholdAdminf: false,
+          isHouseholdAdmin: false,
         }),
         select: expect.any(Object),
       });
