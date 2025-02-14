@@ -5,7 +5,8 @@
  * Last Modified: 2025-02-12
  */
 
-import { PrismaClient } from "@prisma/client";
+import { MockOAuthData } from "@/utils/test/auth-test-utils";
+import { PrismaClient, User } from "@prisma/client";
 import bcrypt from "bcrypt";
 
 interface CreateUserInput {
@@ -48,6 +49,40 @@ export class UserService {
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
     return hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
+  }
+
+  async createFromOAuth(oauthData: MockOAuthData): Promise<User> {
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email: oauthData.email },
+    });
+
+    if (existingUser) {
+      throw new Error("User already exists");
+    }
+
+    return this.prisma.$transaction(async (tx) => {
+      const user = await tx.user.create({
+        data: {
+          email: oauthData.email,
+          name: oauthData.name,
+          emailVerified: new Date(),
+          points: 0,
+          level: 1,
+          isHouseholdAdmin: false,
+        },
+      });
+
+      await tx.account.create({
+        data: {
+          userId: user.id,
+          type: "oauth",
+          provider: oauthData.provider,
+          providerAccountId: oauthData.providerAccountId,
+        },
+      });
+
+      return user;
+    });
   }
 
   async createUser(input: CreateUserInput): Promise<CreateUserResponse> {
