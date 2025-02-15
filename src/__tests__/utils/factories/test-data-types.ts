@@ -31,5 +31,11 @@ export type MockVerificationTokenInput = {
 
 // Ensure our mocks match Prisma's expected types
 export type PrismaUserCreateInput = Prisma.UserCreateInput;
-export type PrismaVerificationTokenCreateInput =
-  Prisma.VerificationTokenCreateInput;
+
+// Override Prisma's VerificationToken type to ensure Date for expires
+export type PrismaVerificationTokenCreateInput = Omit<
+  Prisma.VerificationTokenCreateInput,
+  "expires"
+> & {
+  expires: Date;
+};

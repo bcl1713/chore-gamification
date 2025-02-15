@@ -27,7 +27,7 @@ lastModified: 2025-02-15
       │   └── auth/
       │       ├── user-registration.test.ts  # Tests multiple units together
       │       ├── oauth-authentication.test.ts
-      │       └── email-verification.test.ts
+      │       └──email-verification.test.ts
       └── utils/                 # Test utilities with co-located tests
           ├── factories/
           │   ├── test-data-types.ts
