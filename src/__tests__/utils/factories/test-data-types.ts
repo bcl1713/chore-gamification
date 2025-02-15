@@ -10,6 +10,7 @@ import { User, Prisma } from "@prisma/client";
 export type MockUserInput = Pick<User, "name" | "email"> & {
   password?: string;
   isHouseholdAdmin?: boolean;
+  emailVerified?: Date | null;
 };
 
 export type MockUserWithPassword = User & {
