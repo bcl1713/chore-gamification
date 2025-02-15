@@ -129,6 +129,46 @@ src/
 - Mock external dependencies appropriately
 - Include both unit and integration tests
 
+### Testing Utilities
+
+- Use utility tests for complex test infrastructure
+- Follow TDD principles for test utility development
+- Focus on critical functionality
+
+#### When to Test Utilities
+
+Test utilities that:
+
+- Contain business logic or complex operations
+- Are critical to test reliability
+- Handle resource management
+- Validate test data
+
+Skip testing for:
+
+- Simple object factories without logic
+- Direct pass-through mocks
+- Framework-provided utilities
+- Basic type definitions
+
+#### Utility Test Organization
+
+```txt
+src/__tests__/
+├── utils/           # Separate directory for utility tests
+│   ├── factories/   # Tests for data factories
+│   ├── mocks/       # Tests for mock implementations
+│   └── setup/       # Tests for test setup utilities
+```
+
+#### Utility Test Patterns
+
+- Keep utility tests simple and focused
+- Test only critical functionality
+- Document utility behavior in tests
+- Ensure backwards compatibility
+- Follow project naming conventions
+
 ## Git Practices
 
 ### Commit Messages

@@ -67,6 +67,33 @@ achievements, and rewards.
 - GitHub Actions for CI/CD
 - TypeScript for type safety
 
+### Test Infrastructure
+
+The project follows a comprehensive testing strategy with Test-Driven
+Development (TDD) at its core. This approach emphasizes reliability and
+maintainability across all components, including critical test utilities.
+
+Testing is implemented in distinct layers:
+
+- Unit tests for isolated component testing
+- Integration tests for system interactions
+- Test utility tests for ensuring test infrastructure reliability
+- End-to-end tests planned for future implementation
+
+The testing infrastructure is supported by several utility categories:
+
+- Data factories for consistent test data generation
+- Mock implementations for external dependencies
+- Setup and teardown utilities for test state management
+- Validation helpers for common testing patterns
+
+Quality assurance is maintained through:
+
+- Comprehensive test coverage goals
+- Reliable and tested utility functions
+- Clear documentation standards
+- Maintainability metrics and monitoring
+
 ## Implementation Milestones
 
 ### Phase 1: Project Setup and Test Infrastructure (Weeks 1-2)
