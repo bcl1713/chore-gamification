@@ -2,10 +2,38 @@
 file: /docs/testing/TEST_UTILS_TESTING.md
 description: Strategy for testing test utilities and helpers
 project: Household Chore Gamification System
-lastModified: 2025-02-14
+lastModified: 2025-02-15
 ---
 
 # Testing Test Utilities
+
+## Organization
+
+Test utilities and their tests are co-located within the **tests**/utils
+directory:
+
+```txt
+src/__tests__/utils/
+├── factories/           # Data factories and their tests
+│   ├── test-data-types.ts
+│   ├── test-data-types.test.ts
+│   ├── user-factory.ts
+│   └── user-factory.test.ts
+├── mocks/              # Mock implementations and their tests
+│   ├── next-server.ts
+│   └── next-server.test.ts
+└── setup/             # Test setup utilities and their tests
+    ├── prisma-test-context.ts
+    └── prisma-test-context.test.ts
+```
+
+## Rationale
+
+- Test utilities are test-only code
+- Never built/deployed
+- Co-location provides clear relationship
+- Makes it obvious if tests are missing
+- Simplifies relative imports
 
 ## What to Test
 
@@ -98,19 +126,6 @@ describe("Prisma Test Context", () => {
     expect(spy).toHaveBeenCalled();
   });
 });
-```
-
-## Organization
-
-```txt
-src/__tests__/
-├── utils/
-│   ├── factories/
-│   │   └── user-factory.test.ts
-│   ├── mocks/
-│   │   └── next-server.test.ts
-│   └── setup/
-│       └── prisma-test-context.test.ts
 ```
 
 ## Guidelines

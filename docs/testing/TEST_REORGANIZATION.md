@@ -2,7 +2,7 @@
 file: /docs/testing/TEST_REORGANIZATION.md
 description: Test reorganization plan and checklist for auth functionality
 project: Household Chore Gamification System
-lastModified: 2025-02-14
+lastModified: 2025-02-15
 ---
 
 # Test Reorganization Plan
@@ -12,20 +12,59 @@ lastModified: 2025-02-14
 - [ ] Create new test directory structure
 
   ```txt
-  src/__tests__/
-  ├── unit/
-  │   ├── auth/
-  │   │   ├── user-service.test.ts      # Service layer unit tests
-  │   │   ├── password-validation.test.ts
-  │   │   └── token-generation.test.ts
-  │   └── middleware/
-  │       └── user-validation.test.ts
-  └── integration/
-      └── auth/
-          ├── user-registration.test.ts
-          ├── oauth-authentication.test.ts
-          └── email-verification.test.ts
+  src/
+  ├── lib/
+  │   └── services/
+  │       └── auth/              # Application code
+  │           └── user-service.ts
+  └── __tests__/
+      ├── unit/                  # Unit tests mirror src/ structure
+      │   ├── auth/
+      │   │   └── user-service.test.ts      # Service layer unit tests
+      │   └── middleware/
+      │       └── user-validation.test.ts
+      ├── integration/           # Integration tests grouped by feature
+      │   └── auth/
+      │       ├── user-registration.test.ts  # Tests multiple units together
+      │       ├── oauth-authentication.test.ts
+      │       └── email-verification.test.ts
+      └── utils/                 # Test utilities with co-located tests
+          ├── factories/
+          │   ├── test-data-types.ts
+          │   ├── test-data-types.test.ts
+          │   ├── user-factory.ts
+          │   └── user-factory.test.ts
+          ├── mocks/
+          │   ├── next-server.ts
+          │   └── next-server.test.ts
+          └── setup/
+              ├── prisma-test-context.ts
+              └── prisma-test-context.test.ts
   ```
+
+## Organization Principles
+
+1. Application Code & Unit Tests
+
+   - Application code lives in main src/ directory
+   - Unit tests mirror this structure in src/**tests**/unit/
+   - Maintains clean separation between source and tests
+   - 1:1 relationship between source files and their unit tests
+
+2. Integration Tests
+
+   - Live in dedicated integration/ directory
+   - Grouped by feature rather than source structure
+   - Test multiple units working together
+   - May not have 1:1 relationship with source files
+
+3. Test Utilities
+   - Contained entirely within **tests**/utils/
+   - Tests co-located with their utilities
+   - Never built/deployed
+   - Exist purely to support testing
+
+[Rest of document remains the same...]
 
 ## Test Utility Organization and Testing
 
